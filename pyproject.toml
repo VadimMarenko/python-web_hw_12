@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "python-web-hw-12"
+version = "0.1.0"
+description = ""
+authors = ["Vadim Marenko <vadim.marenko@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+packages = [{include = "python_web_hw_12"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.1"
+sqlalchemy = "^2.0.23"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
