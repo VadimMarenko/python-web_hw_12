@@ -15,6 +15,9 @@ python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 python-multipart = "^0.0.6"
+psycopg2-binary = "^2.9.9"
+alembic = "^1.12.1"
+pydantic = {extras = ["email"], version = "^2.4.2"}
 
 
 [build-system]
