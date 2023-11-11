@@ -94,4 +94,4 @@ async def birthdays_per_week(db: Session, days: int, skip: int, limit: int):
 
 
 async def get_user_by_email(email: str, db: Session) -> Users | None:
-    return db.query(Users).filter(Users.email == email).first()
+    return db.query(Users).filter_by(email=email).first()
