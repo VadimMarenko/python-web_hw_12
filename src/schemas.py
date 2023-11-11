@@ -1,6 +1,7 @@
 from datetime import date
 
 from pydantic import BaseModel, EmailStr, Field, condate
+from src.database.models import Role
 
 
 class UserModel(BaseModel):
@@ -14,14 +15,17 @@ class UserModel(BaseModel):
     description: str = Field(default="", max_length=250)
 
 
-class ResponseUser(BaseModel):
+class UserResponse(BaseModel):
     id: int
     first_name: str | None
     last_name: str | None
-    email: EmailStr | None
+    username: str
+    email: EmailStr
     phone_number: str | None
     born_date: date | None
     description: str | None
+    avatar: str
+    role: Role
 
     class Config:
         from_attributes = True
@@ -31,14 +35,15 @@ class UserEmailModel(BaseModel):
     email: EmailStr
 
 
-class UserResponse(BaseModel):
-    id: int
-    username: str
-    email: str
-    avatar: str
+# class UserResponse(BaseModel):
+#     id: int
+#     username: str
+#     email: str
+#     avatar: str
+#     role: Role
 
-    class Config:
-        from_attributes = True
+#     class Config:
+#         from_attributes = True
 
 
 class TokenModel(BaseModel):
