@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+from libgravatar import Gravatar
 from sqlalchemy.orm import Session
 from sqlalchemy import or_, func
 
@@ -18,11 +19,17 @@ async def get_user(user_id: int, db: Session):
 
 
 async def create_user(body: UserModel, db: Session):
-    user = Users(**body.dict())
+    g = Gravatar(body.email)
+    user = Users(**body.dict(), avatar=g.get_image())
     db.add(user)
     db.commit()
     db.refresh(user)
     return user
+
+
+async def update_token(user: Users, refresh_token, db: Session):
+    user.refresh_token = refresh_token
+    db.commit()
 
 
 async def update_user(body: UserModel, user_id: int, db: Session):
