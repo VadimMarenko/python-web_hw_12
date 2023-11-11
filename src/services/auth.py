@@ -102,4 +102,4 @@ class Auth:
         return user
 
 
-auth_service = Auth
+auth_service = Auth()
