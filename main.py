@@ -1,13 +1,17 @@
 import time
 
 from fastapi import FastAPI, Depends, HTTPException, status, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from src.database.db import get_db
-from src.routes import users
+from src.routes import users, auth
 
 app = FastAPI()
+templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(direcotory="static"), name="static")
 
 
 @app.middleware("http")
@@ -44,4 +48,5 @@ def healthchecker(db: Session = Depends(get_db)):
         )
 
 
+app.include_router(auth.router, prefix="/api")
 app.include_router(users.router, prefix="/api")
