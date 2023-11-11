@@ -84,6 +84,6 @@ async def refresh_token(
     }
 
 
-@app.get("/secret")
-async def read_item(current_user: Users = Depends(auth_service.get_current_user)):
-    return {"message": "secret router", "owner": current_user.email}
+# @app.get("/secret")
+# async def read_item(current_user: Users = Depends(auth_service.get_current_user)):
+#     return {"message": "secret router", "owner": current_user.email}
