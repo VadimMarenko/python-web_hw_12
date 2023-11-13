@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from pydantic import BaseModel, EmailStr, Field, condate
 from src.database.models import Role
@@ -25,7 +25,9 @@ class UserResponse(BaseModel):
     born_date: date | None
     description: str | None
     avatar: str
-    role: Role
+    roles: Role
+    created_at: datetime
+    updated_at: datetime
 
     class Config:
         from_attributes = True
