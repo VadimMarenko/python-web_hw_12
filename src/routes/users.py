@@ -14,7 +14,7 @@ from src.services.roles import RoleAccess
 router = APIRouter(prefix="/users", tags=["users"])
 
 allowed_operation_get = RoleAccess([Role.admin, Role.moderator, Role.user])
-allowed_operation_create = RoleAccess([Role.admin, Role.moderator, Role.user])
+allowed_operation_create = RoleAccess([Role.admin, Role.moderator])
 allowed_operation_update = RoleAccess([Role.admin, Role.moderator])
 allowed_operation_remove = RoleAccess([Role.admin])
 
@@ -67,6 +67,7 @@ async def create_user(
     "/{user_id}",
     response_model=UserResponse,
     dependencies=[Depends(allowed_operation_update)],
+    description="Only moderator and admin",
 )
 async def update_user(
     body: UserModel,
@@ -84,6 +85,7 @@ async def update_user(
     "/{user_id}",
     response_model=UserResponse,
     dependencies=[Depends(allowed_operation_update)],
+    description="Only moderator and admin",
 )
 async def update_user_email(
     body: UserEmailModel,
@@ -101,6 +103,7 @@ async def update_user_email(
     "/{user_id}",
     status_code=status.HTTP_204_NO_CONTENT,
     dependencies=[Depends(allowed_operation_remove)],
+    description="Only admin",
 )
 async def remove_user(
     user_id: int = Path(ge=1),
