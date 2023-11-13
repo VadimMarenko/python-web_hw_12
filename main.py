@@ -12,8 +12,8 @@ from src.routes import users, auth
 from src.repository.users import get_user_by_email
 
 app = FastAPI()
-templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# templates = Jinja2Templates(directory="templates")
+# app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 @app.middleware("http")
@@ -25,11 +25,16 @@ async def add_process_time_header(request: Request, call_next):
     return response
 
 
-@app.get("/", response_class=HTMLResponse, description="Main Page")
-def read_root(request: Request):
-    return templates.TemplateResponse(
-        "index.html", {"request": request, "title": "My App"}
-    )
+@app.get("/", description="Main Page")
+def read_root():
+    return {"message": "REST APP v1.2"}
+
+
+# @app.get("/", response_class=HTMLResponse, description="Main Page")
+# def read_root(request: Request):
+# return templates.TemplateResponse(
+# "index.html", {"request": request, "title": "My App"}
+# )
 
 
 @app.get("/api/healthchecker")
